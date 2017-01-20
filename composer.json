@@ -1,0 +1,25 @@
+{
+    "name": “vendor-name/plugin-name”,
+    "description": “A description of this plugin”,
+    "type": "wordpress-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": “My Name“,
+            "email": “my@email.com"
+        }
+    ],
+    "require": {
+        "arc/framework": "0.*",
+    },
+    "autoload": {
+        "psr-4":{
+            “Vendor\\PluginName\\”: "src/"
+        }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/TestCase.php"
+        ]
+    }
+}
