@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "arc-framework/framework": "0.*"
+        "arc-framework/framework": "dev-master"
     },
     "autoload": {
         "psr-4":{
