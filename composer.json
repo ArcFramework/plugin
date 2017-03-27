@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4":{
-            "Vendor\\PluginName\\": "src/"
+            "Vendor\\PluginName\\": "app/"
         }
     },
     "autoload-dev": {
