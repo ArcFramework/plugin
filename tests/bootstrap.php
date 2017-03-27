@@ -1,13 +1,11 @@
 <?php
 /**
  * PHPUnit bootstrap file
- *
- * @package Makeweb_Reaxml_Importer
  */
 
-$_tests_dir = getenv( 'WP_TESTS_DIR' );
+$_tests_dir = getenv('WP_TESTS_DIR');
 if ( ! $_tests_dir ) {
-    $_tests_dir = '/tmp/wordpress-tests-lib';
+    $_tests_dir = posix_getpwuid(posix_getuid())['dir'] . '/.arc/wordpress-tests-lib';
 }
 
 // Give access to tests_add_filter() function.
