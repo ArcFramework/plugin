@@ -1,6 +1,7 @@
 <?php
 
 use Arc\Testing\ArcTestCase;
+use Illuminate\Contracts\Console\Kernel;
 
 class TestCase extends ArcTestCase
 {
@@ -12,7 +13,6 @@ class TestCase extends ArcTestCase
 
         $this->app = $plugin;
     }
-
 
     public function tearDown()
     {
