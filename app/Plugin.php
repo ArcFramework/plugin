@@ -2,9 +2,9 @@
 
 namespace Vendor\PluginName;
 
-use Arc\BasePlugin;
+use Arc\Application;
 
-class Plugin extends BasePlugin
+class Plugin extends Application
 {
 
 }
