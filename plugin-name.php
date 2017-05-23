@@ -1,7 +1,7 @@
 <?php
 
 /*
-Plugin Name: Plugin Name
+Plugin Name: My Plugin Name
 Plugin URI: http://plugin.com.au
 Description: A description of this plugin
 Version: 0.0
