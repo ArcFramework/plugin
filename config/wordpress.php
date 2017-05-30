@@ -13,5 +13,5 @@ return [
 
     'custom_post_types' => [
         // \Vendor\MyPlugin\MyCustomPostType::class,
-    ]
+    ],
 ];
