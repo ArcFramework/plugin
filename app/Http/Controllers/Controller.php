@@ -6,5 +6,4 @@ use Arc\Http\Controllers\BaseController;
 
 class Controller extends BaseController
 {
-
 }
