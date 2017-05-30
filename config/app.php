@@ -19,7 +19,13 @@ return [
          */
         Illuminate\Database\DatabaseServiceProvider::class,
         Illuminate\Filesystem\FilesystemServiceProvider::class,
+        Illuminate\Pipeline\PipelineServiceProvider::class,
+        Illuminate\Session\SessionServiceProvider::class,
+        Illuminate\Translation\TranslationServiceProvider::class,
+        Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Arc\Console\CommandServiceProvider::class,
+        Arc\Cron\CronServiceProvider::class,
 
         /*
          * Package Service Providers...
