@@ -34,5 +34,5 @@ return [
         /*
          * Application Service Providers...
          */
-     ]
+     ],
 ];
