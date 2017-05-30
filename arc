@@ -1,165 +1,69 @@
 #!/usr/bin/env php
 <?php
 
-use Acclimate\Container\ContainerAcclimator;
-use Silly\Application;
-use Symfony\Component\Console\Output\OutputInterface;
-use Vendor\PluginName\Plugin;
+/*
+|--------------------------------------------------------------------------
+| Register The Auto Loader
+|--------------------------------------------------------------------------
+|
+| Composer provides a convenient, automatically generated class loader
+| for our application. We just need to utilize it! We'll require it
+| into the script here so that we do not have to worry about the
+| loading of any our classes "manually". Feels great to relax.
+|
+*/
+require __DIR__.'/vendor/autoload.php';
 
-$arc = new ArcCommandLineInterface(__DIR__);
-$arc->boot();
+/*
+|--------------------------------------------------------------------------
+| Tell Arc to boot without depending on wordpress
+|--------------------------------------------------------------------------
+|
+| In order that we can run Arc CLI out of the box without relying on a
+| local instance of Wordpress we need to set this constant. Arc will
+| know to bind in implementations of it's core classes which don't
+| rely on any wordpress functions.
+*/
+define('BOOT_ARC_WITHOUT_WORDPRESS', true);
 
-class ArcCommandLineInterface
-{
-    /**
-     * The instance of Silly CLI
-     * @var Silly\Application
-     **/
-    protected $arc;
+/*
+|--------------------------------------------------------------------------
+| Instantiate and boot the plugin class
+|--------------------------------------------------------------------------
+| The Plugin class serves as the centre of our application. It acts as
+| the IoC container and stores all plugin constants
+*/
+$app = new \Vendor\PluginName\Plugin(__DIR__.'/plugin-name.php');
 
-    /**
-     * The command signatures (key) and the command classes which they map to (value)
-     * @var array
-     **/
-    protected $commands = [
-        'make:provider [name]'      => \Arc\Console\GenerateProviderCommand::class,
-        'make:controller [name]'    => \Arc\Console\GenerateControllerCommand::class,
-        'ship'                      => \Arc\Console\ShipPluginCommand::class,
-    ];
+/*
+|--------------------------------------------------------------------------
+| Run The Arc CLI Application
+|--------------------------------------------------------------------------
+|
+| When we run the console application, the current CLI command will be
+| executed in this console and the response sent back to a terminal
+| or another output device for the developers. Here goes nothing!
+|
+*/
 
-    /**
-     * string $dir the path to the directory which contains the plugin
-     * @var string
-     **/
-    protected $dir;
+$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
 
-    /**
-     * The environment variables that have been set
-     * @var array
-     **/
-    protected $env = [];
+$status = $kernel->handle(
+    $input = new Symfony\Component\Console\Input\ArgvInput,
+    new Symfony\Component\Console\Output\ConsoleOutput
+);
 
-    /**
-     * The instance of the Arc Framework based plugin
-     * @var Arc\BasePlugin
-     **/
-    public function __construct($dir)
-    {
-        $this->dir = $dir;
-    }
+/*
+|--------------------------------------------------------------------------
+| Shutdown The Application
+|--------------------------------------------------------------------------
+|
+| Once Arc CLI has finished running, we will fire off the shutdown events
+| so that any final work may be done by the application before we shut
+| down the process. This is the last thing to happen to the request.
+|
+*/
 
-    /**
-     * Boot the command line interface
-     **/
-    public function boot()
-    {
-        $this->registerAutoLoader();
-        $this->loadEnvironmentVariables();
-        $this->bootWordpress();
-        $this->bootPlugin();
-        $this->buildCommandLineInterface();
-        $this->registerCommands();
-        $this->run();
-    }
+$kernel->terminate($input, $status);
 
-    /**
-     * Register the composer autoloader for the plugin
-     **/
-    protected function registerAutoloader()
-    {
-        require($this->dir . '/vendor/autoload.php');
-    }
-
-    /**
-     * Load any environment variables that have been set
-     **/
-    protected function loadEnvironmentVariables()
-    {
-        if (file_exists($this->dir . '/.env')) {
-            foreach(file($this->dir . '/.env') as $envLine) {
-                $pair = explode('=', $envLine);
-                $this->env[trim($pair[0])] = trim($pair[1]);
-            }
-        }
-    }
-
-    /**
-     * Boot the wordpress application
-     **/
-    protected function bootWordpress()
-    {
-        $wordpressPath = $this->getEnv('WORDPRESS_PATH', '/../../../../');
-        define('WP_USE_THEMES', false);
-
-        // Main wordpress bootstrap file
-        require $wordpressPath . '/wp-load.php';
-
-        // Plugin bootstrap file
-        require $wordpressPath . '/wp-admin/includes/plugin.php';
-    }
-
-    /**
-     * Get the value for the given environment variable key if it exists, or else
-     * return the default
-     * @param string $key
-     * @param mixed $default
-     * @return mixed
-     **/
-    protected function getEnv($key, $default = null)
-    {
-        if (!isset($this->env[$key])) {
-            return $default;
-        }
-
-        return $this->env[$key];
-    }
-
-    /**
-     * Boot the Arc framework based plugin
-     **/
-    protected function bootPlugin()
-    {
-        $this->plugin = new Plugin($this->getEnv('PLUGIN_PATH') . '/' . $this->getEnv('PLUGIN_FILENAME'));
-        $this->plugin->boot();
-    }
-
-    protected function buildCommandLineInterface()
-    {
-        // Instantiate the console application
-        $this->arc = new Application;
-
-        // Register the container
-        $this->arc->useContainer($this->plugin);
-    }
-
-    /**
-     * Register any commands for the CLI
-     **/
-    protected function registerCommands()
-    {
-        foreach ($this->commands as $signature => $class) {
-            $this->arc->command($signature, $class);
-        }
-    }
-
-    /**
-     * Run the CLI
-     **/
-    protected function run()
-    {
-        $this->arc->run();
-    }
-
-    /**
-     * Get the current user's home directory
-     * @return string
-     **/
-    protected function getHomeDirectory()
-    {
-        if (isset($_SERVER['HOME'])) {
-            return $_SERVER['HOME'];
-        }
-
-        return posix_getpwuid(posix_getuid())['dir'];
-    }
-}
+exit($status);
