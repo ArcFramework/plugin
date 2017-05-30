@@ -12,14 +12,14 @@ Author URI: http://myname.com.au
 /*
  * If this file is called directly, abort.
  */
-if ( ! defined( 'WPINC' ) ) {
+if (!defined('WPINC')) {
     die;
 }
 
 /*
  * Include dependencies
  */
-require (__DIR__ . "/vendor/autoload.php");
+require __DIR__.'/vendor/autoload.php';
 
 /*
  *  Boot Plugin
