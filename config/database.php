@@ -1,7 +1,7 @@
 <?php
 
 /**
- * We need the global database object to get the database prefix
+ * We need the global database object to get the database prefix.
  **/
 global $wpdb;
 
@@ -38,15 +38,15 @@ return [
 
     'connections' => [
         'mysql' => [
-            'driver' => 'mysql',
-            'host' => $app->env('DB_HOST', '127.0.0.1'),
-            'port' => $app->env('DB_PORT', '3306'),
-            'database' => $app->env('DB_DATABASE', defined('DB_NAME') ? DB_NAME : ''),
-            'username' => $app->env('DB_USERNAME', defined('DB_USER') ? DB_USER : ''),
-            'password' => $app->env('DB_PASSWORD', defined('DB_PASSWORD') ? DB_PASSWORD : ''),
+            'driver'      => 'mysql',
+            'host'        => $app->env('DB_HOST', '127.0.0.1'),
+            'port'        => $app->env('DB_PORT', '3306'),
+            'database'    => $app->env('DB_DATABASE', defined('DB_NAME') ? DB_NAME : ''),
+            'username'    => $app->env('DB_USERNAME', defined('DB_USER') ? DB_USER : ''),
+            'password'    => $app->env('DB_PASSWORD', defined('DB_PASSWORD') ? DB_PASSWORD : ''),
             'unix_socket' => $app->env('DB_SOCKET', ''),
-            'charset' => 'utf8mb4',
-            'collation' => defined('DB_COLLATE') ?
+            'charset'     => 'utf8mb4',
+            'collation'   => defined('DB_COLLATE') ?
                 (empty(DB_COLLATE) ? 'utf8mb4_unicode_ci' : DB_COLLATE) : 'utf8mb4_unicode_ci',
             'prefix' => $wpdb->base_prefix ?? null,
             'strict' => false,
