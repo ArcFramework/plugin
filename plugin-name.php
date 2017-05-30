@@ -25,4 +25,4 @@ require __DIR__.'/vendor/autoload.php';
  *  Boot Plugin
  */
 $plugin = new \Vendor\PluginName\Plugin(__FILE__);
-$plugin->boot();
+$plugin->start();
