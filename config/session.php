@@ -1,69 +1,179 @@
 <?php
 
-/**
- * We need the global database object to get the database prefix.
- **/
-global $wpdb;
-
 return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Database Connection Name
+    | Default Session Driver
     |--------------------------------------------------------------------------
     |
-    | Here you may specify which of the database connections below you wish
-    | to use as your default connection for all database work. Of course
-    | you may use many connections at once using the Database library.
+    | This option controls the default session "driver" that will be used on
+    | requests. By default, we will use the lightweight native driver but
+    | you may specify any of the other wonderful drivers provided here.
+    |
+    | Supported: "file", "cookie", "database", "apc",
+    |            "memcached", "redis", "array"
     |
     */
 
-    'default' => $app->env('DB_CONNECTION', 'mysql'),
+    'driver' => 'file',
 
     /*
     |--------------------------------------------------------------------------
-    | Database Connections
+    | Session Lifetime
     |--------------------------------------------------------------------------
     |
-    | Here are each of the database connections setup for your application.
-    | Of course, examples of configuring each database platform that is
-    | supported by Laravel is shown below to make development simple.
-    |
-    |
-    | All database work in Laravel is done through the PHP PDO facilities
-    | so make sure you have the driver for your particular database of
-    | choice installed on your machine before you begin development.
+    | Here you may specify the number of minutes that you wish the session
+    | to be allowed to remain idle before it expires. If you want them
+    | to immediately expire on the browser closing, set that option.
     |
     */
 
-    'connections' => [
-        'mysql' => [
-            'driver'      => 'mysql',
-            'host'        => $app->env('DB_HOST', '127.0.0.1'),
-            'port'        => $app->env('DB_PORT', '3306'),
-            'database'    => $app->env('DB_DATABASE', defined('DB_NAME') ? DB_NAME : ''),
-            'username'    => $app->env('DB_USERNAME', defined('DB_USER') ? DB_USER : ''),
-            'password'    => $app->env('DB_PASSWORD', defined('DB_PASSWORD') ? DB_PASSWORD : ''),
-            'unix_socket' => $app->env('DB_SOCKET', ''),
-            'charset'     => 'utf8mb4',
-            'collation'   => defined('DB_COLLATE') ?
-                (empty(DB_COLLATE) ? 'utf8mb4_unicode_ci' : DB_COLLATE) : 'utf8mb4_unicode_ci',
-            'prefix' => $wpdb->base_prefix ?? null,
-            'strict' => false,
-            'engine' => null,
-        ],
-    ],
+    'lifetime' => 120,
+
+    'expire_on_close' => false,
 
     /*
     |--------------------------------------------------------------------------
-    | Migration Repository Table
+    | Session Encryption
     |--------------------------------------------------------------------------
     |
-    | This table keeps track of all the migrations that have already run for
-    | your application. Using this information, we can determine which of
-    | the migrations on disk haven't actually been run in the database.
+    | This option allows you to easily specify that all of your session data
+    | should be encrypted before it is stored. All encryption will be run
+    | automatically by Arc and you can use the Session like normal.
     |
     */
 
-    'migrations' => 'migrations',
+    'encrypt' => false,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Session File Location
+    |--------------------------------------------------------------------------
+    |
+    | When using the native session driver, we need a location where session
+    | files may be stored. A default has been set for you but a different
+    | location may be specified. This is only needed for file sessions.
+    |
+    */
+
+    'files' => $app->storagePath('framework/sessions'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Session Database Connection
+    |--------------------------------------------------------------------------
+    |
+    | When using the "database" or "redis" session drivers, you may specify a
+    | connection that should be used to manage these sessions. This should
+    | correspond to a connection in your database configuration options.
+    |
+    */
+
+    'connection' => null,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Session Database Table
+    |--------------------------------------------------------------------------
+    |
+    | When using the "database" session driver, you may specify the table we
+    | should use to manage the sessions. Of course, a sensible default is
+    | provided for you; however, you are free to change this as needed.
+    |
+    */
+
+    'table' => 'sessions',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Session Cache Store
+    |--------------------------------------------------------------------------
+    |
+    | When using the "apc" or "memcached" session drivers, you may specify a
+    | cache store that should be used for these sessions. This value must
+    | correspond with one of the application's configured cache stores.
+    |
+    */
+
+    'store' => null,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Session Sweeping Lottery
+    |--------------------------------------------------------------------------
+    |
+    | Some session drivers must manually sweep their storage location to get
+    | rid of old sessions from storage. Here are the chances that it will
+    | happen on a given request. By default, the odds are 2 out of 100.
+    |
+    */
+
+    'lottery' => [2, 100],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Session Cookie Name
+    |--------------------------------------------------------------------------
+    |
+    | Here you may change the name of the cookie used to identify a session
+    | instance by ID. The name specified here will get used every time a
+    | new session cookie is created by the framework for every driver.
+    |
+    */
+
+    'cookie' => 'arc_session',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Session Cookie Path
+    |--------------------------------------------------------------------------
+    |
+    | The session cookie path determines the path for which the cookie will
+    | be regarded as available. Typically, this will be the root path of
+    | your application but you are free to change this when necessary.
+    |
+    */
+
+    'path' => '/',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Session Cookie Domain
+    |--------------------------------------------------------------------------
+    |
+    | Here you may change the domain of the cookie used to identify a session
+    | in your application. This will determine which domains the cookie is
+    | available to in your application. A sensible default has been set.
+    |
+    */
+
+    'domain' => null,
+
+    /*
+    |--------------------------------------------------------------------------
+    | HTTPS Only Cookies
+    |--------------------------------------------------------------------------
+    |
+    | By setting this option to true, session cookies will only be sent back
+    | to the server if the browser has a HTTPS connection. This will keep
+    | the cookie from being sent to you if it can not be done securely.
+    |
+    */
+
+    'secure' => false,
+
+    /*
+    |--------------------------------------------------------------------------
+    | HTTP Access Only
+    |--------------------------------------------------------------------------
+    |
+    | Setting this value to true will prevent JavaScript from accessing the
+    | value of the cookie and the cookie will only be accessible through
+    | the HTTP protocol. You are free to modify this option if needed.
+    |
+    */
+
+    'http_only' => true,
+
 ];
