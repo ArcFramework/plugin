@@ -9,6 +9,6 @@
 |
 */
 
-/**
+/*
 $shortcodes->code('my-contact-form')->rendersView('contact.create');
 **/
