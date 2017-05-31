@@ -11,7 +11,7 @@
 |
 */
 
-/**
+/*
 $routes->get('/some-uri', function () {
     return view('welcome');
 });
