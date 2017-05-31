@@ -5,7 +5,7 @@ namespace Vendor\MyPlugin\Providers;
 use Arc\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 
-class ViewServiceProvider extends ServiceProvider
+class RouteServiceProvider extends ServiceProvider
 {
     public function boot(Router $router)
     {
