@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-/**
+/*
 $router->group(['prefix' => 'api', function() use ($router) {
     $router->get('/user', function (Request $request) {
         return $request->user();
