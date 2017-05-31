@@ -9,7 +9,7 @@
 |
 */
 
-/**
+/*
 $actions->add('pants_on_fire', function($user) {
     $user->stopDropAndRoll();
 });
