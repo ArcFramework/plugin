@@ -34,5 +34,7 @@ return [
         /*
          * Application Service Providers...
          */
+        Vendor\MyPlugin\Providers\RouteServiceProvider::class,
+        Vendor\MyPlugin\Providers\WordpressServiceProvider::class,
      ],
 ];
