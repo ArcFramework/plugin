@@ -1,6 +1,6 @@
 <?php
 
-namespace Vendor\MyPlugin\Providers;
+namespace Vendor\PluginName\Providers;
 
 use Arc\Routing\Router;
 use Illuminate\Support\ServiceProvider;
@@ -10,7 +10,7 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         $router->group([
-            'namespace' => 'Vendor\MyPlugin\Http\Controllers',
+            'namespace' => 'Vendor\PluginName\Http\Controllers',
         ], function () use ($router) {
 
             // Load browser routes
