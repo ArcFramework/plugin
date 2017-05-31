@@ -9,7 +9,7 @@
 |
 */
 
-/**
+/*
 $adminMenus->addSettingsPage()
     ->whichRendersView('admin.settings')
     ->withSettings([
