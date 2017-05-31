@@ -1,6 +1,6 @@
 <?php
 
-namespace Vendor\MyPlugin\Providers;
+namespace Vendor\PluginName\Providers;
 
 use Arc\Admin\AdminMenus;
 use Arc\Hooks\Actions;
