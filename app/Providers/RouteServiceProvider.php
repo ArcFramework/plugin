@@ -7,6 +7,11 @@ use Illuminate\Support\ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
 {
+    /**
+     * Bootstrap the application services.
+     *
+     * @return void
+     */
     public function boot(Router $router)
     {
         $router->group([
@@ -19,5 +24,16 @@ class RouteServiceProvider extends ServiceProvider
             // Load API routes
             include $this->app->basePath().'/routes/api.php';
         });
+    }
+    
+    
+    /**
+     * Register the application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
     }
 }
