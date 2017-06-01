@@ -34,8 +34,7 @@ class WordpressServiceProvider extends ServiceProvider
         include $this->app->basePath().'/wordpress/shortcodes.php';
         $shortcodes->register();
     }
-    
-    
+
     /**
      * Register the application services.
      *
