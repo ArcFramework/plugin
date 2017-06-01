@@ -10,6 +10,11 @@ use Illuminate\Support\ServiceProvider;
 
 class WordpressServiceProvider extends ServiceProvider
 {
+    /**
+     * Bootstrap the application services.
+     *
+     * @return void
+     */
     public function boot(
         Actions $actions,
         AdminMenus $adminMenus,
@@ -28,5 +33,16 @@ class WordpressServiceProvider extends ServiceProvider
         // Register shortcodes
         include $this->app->basePath().'/wordpress/shortcodes.php';
         $shortcodes->register();
+    }
+    
+    
+    /**
+     * Register the application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
     }
 }
