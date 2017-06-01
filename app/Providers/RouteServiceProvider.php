@@ -25,8 +25,7 @@ class RouteServiceProvider extends ServiceProvider
             include $this->app->basePath().'/routes/api.php';
         });
     }
-    
-    
+
     /**
      * Register the application services.
      *
