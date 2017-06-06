@@ -12,7 +12,7 @@
 */
 
 /*
-$routes->get('/some-uri', function () {
+$router->get('/some-uri', function () {
     return view('welcome');
 });
 **/
