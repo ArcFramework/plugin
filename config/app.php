@@ -35,13 +35,8 @@ return [
         /*
          * Application Service Providers...
          */
-        MakeWeb\REAXMLImporter\Providers\ActionServiceProvider::class,
-        MakeWeb\REAXMLImporter\Providers\ActivationServiceProvider::class,
-        MakeWeb\REAXMLImporter\Providers\AdminServiceProvider::class,
-        MakeWeb\REAXMLImporter\Providers\AssetServiceProvider::class,
-        MakeWeb\REAXMLImporter\Providers\CustomPostTypeServiceProvider::class,
-        MakeWeb\REAXMLImporter\Providers\DiviModuleServiceProvider::class,
-        MakeWeb\REAXMLImporter\Providers\ImporterServiceProvider::class,
-        MakeWeb\REAXMLImporter\Providers\RouteServiceProvider::class,
-    ]
+        Vendor\PluginName\Providers\AppServiceProvider::class,
+        Vendor\PluginName\Providers\RouteServiceProvider::class,
+        Vendor\PluginName\Providers\WordpressServiceProvider::class,
+     ],
 ];
